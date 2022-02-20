@@ -4,14 +4,26 @@ import verifyAuth from "../../middleware/auth";
 export const ordersRoute = express.Router();
 const store = new OrderStore();
 const index = async (_req: Request, res: Response) => {
-  const products = await store.index();
-  res.json(products);
+  try {
+    const products = await store.index();
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const product = await store.show(req.params.id);
+  try {
+    const product = await store.show(req.params.id);
 
-  res.json(product);
+    res.json(product);
+  } catch (err) {
+    console.log(err);
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const create = async (req: Request, res: Response) => {
@@ -38,8 +50,20 @@ const addProduct = async (req: Request, res: Response) => {
     res.json(err);
   }
 };
+const currentOrdersByUser = async (req: Request, res: Response) => {
+  try {
+    const orders = await store.currentOrdersByUser(Number(req.params.user_id));
 
-ordersRoute.get("/", index);
-ordersRoute.get("/:id", show);
+    res.json(orders);
+  } catch (err) {
+    console.log(err);
+    res.status(400);
+    res.json(err);
+  }
+};
+
+ordersRoute.get("/", verifyAuth, index);
+ordersRoute.get("/:id", verifyAuth, show);
+ordersRoute.get("/byuser/:user_id", verifyAuth, currentOrdersByUser);
 ordersRoute.post("/", verifyAuth, create);
 ordersRoute.put("/", verifyAuth, addProduct);

@@ -31,7 +31,8 @@ Navigate to the root directory and run the command below to migrate the database
 `db-migrate up`
 
  
-
+### Databse port
+database on port `5432`
 ## Enviromental Variables Set up
 rename `.env.sample` file to `.env` and  set your setup values
 
@@ -40,7 +41,8 @@ rename `.env.sample` file to `.env` and  set your setup values
 
 `starting app on: 0.0.0.0:3000`
 
- 
+### App Port  
+App on port `3000` 
 ## Endpoint Access
 APIs endpoints can be found here [REQUIREMENT.md](REQUIREMENTS.md) 
 

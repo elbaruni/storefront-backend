@@ -7,22 +7,34 @@ export const usersRoute = express.Router();
 const store = new UserStore();
 
 const index = async (_req: Request, res: Response) => {
-  const users = await store.index();
-  res.json(users);
+  try {
+    const users = await store.index();
+    res.json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const user = await store.show(req.params.id);
+  try {
+    const user = await store.show(req.params.id);
 
-  res.json(user);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const create = async (req: Request, res: Response) => {
   try {
     const user: User = {
       username: req.body.username,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       password_digest: req.body.password,
     };
 

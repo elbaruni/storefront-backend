@@ -22,11 +22,30 @@ export default describe("User Model", () => {
 
     const created = await store.create({
       username: "username",
-      firstName: "first name",
-      lastName: "last name",
+      firstname: "first name",
+      lastname: "last name",
       password_digest: "password",
     });
     expect(created.id).toEqual(1);
+  });
+  it("index method should return array of users", async () => {
+    const users = await store.index();
+    expect(users).toEqual([
+      {
+        id: 1,
+        username: "username",
+        firstname: "first name",
+        lastname: "last name",
+      },
+    ]);
+  });
+  it("show method should return user by id", async () => {
+    const users = await store.show("1");
+    expect(users).toEqual({
+      username: "username",
+      firstname: "first name",
+      lastname: "last name",
+    });
   });
 
   it("authenticate valid username and password", async () => {

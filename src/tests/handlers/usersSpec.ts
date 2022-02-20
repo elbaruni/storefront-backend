@@ -19,8 +19,8 @@ export default describe("Test Users handlers", () => {
         {
           id: 1,
           username: "user001",
-          firstName: "first",
-          lastName: "last",
+          firstname: "first",
+          lastname: "last",
         },
       ])
     );
@@ -28,8 +28,8 @@ export default describe("Test Users handlers", () => {
       Promise.resolve({
         id: 1,
         username: "user001",
-        firstName: "first",
-        lastName: "last",
+        firstname: "first",
+        lastname: "last",
       })
     );
 
@@ -37,8 +37,8 @@ export default describe("Test Users handlers", () => {
       Promise.resolve({
         id: 1,
         username: "user001",
-        firstName: "first",
-        lastName: "last",
+        firstname: "first",
+        lastname: "last",
       })
     );
 
@@ -46,8 +46,8 @@ export default describe("Test Users handlers", () => {
       Promise.resolve({
         id: 1,
         username: "user001",
-        firstName: "first",
-        lastName: "last",
+        firstname: "first",
+        lastname: "last",
       })
     );
   });
@@ -57,7 +57,7 @@ export default describe("Test Users handlers", () => {
       .set("Authorization", "Bearer " + testToken);
     expect(response.status).toBe(200);
     expect(response.body).toEqual([
-      { id: 1, username: "user001", firstName: "first", lastName: "last" },
+      { id: 1, username: "user001", firstname: "first", lastname: "last" },
     ]);
   });
   it("show users ", async () => {
@@ -68,15 +68,15 @@ export default describe("Test Users handlers", () => {
     expect(response.body).toEqual({
       id: 1,
       username: "user001",
-      firstName: "first",
-      lastName: "last",
+      firstname: "first",
+      lastname: "last",
     });
   });
   it("creates user ", async () => {
     const response = await request.post(apiPath).send({
       username: "userTest1",
-      firstName: "first test",
-      lastName: "last test",
+      firstname: "first test",
+      lastname: "last test",
       password_digest: "1111",
     });
 

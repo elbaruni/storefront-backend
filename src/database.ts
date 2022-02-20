@@ -8,6 +8,7 @@ const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_TEST_DB,
+  POSTGRES_PORT,
   ENV,
 } = process.env;
 
@@ -16,6 +17,7 @@ console.log(ENV);
 if (ENV === "test") {
   options = {
     host: POSTGRES_HOST,
+    port: Number(POSTGRES_PORT),
     database: POSTGRES_TEST_DB,
     user: POSTGRES_USER,
     password: POSTGRES_PASSWORD,
@@ -24,6 +26,7 @@ if (ENV === "test") {
 if (ENV === "dev") {
   options = {
     host: POSTGRES_HOST,
+    port: Number(POSTGRES_PORT),
     database: POSTGRES_DB,
     user: POSTGRES_USER,
     password: POSTGRES_PASSWORD,

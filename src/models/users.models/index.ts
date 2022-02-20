@@ -4,16 +4,16 @@ import { hash, compare } from "../../middleware/hashing";
 export type User = {
   id?: number;
   username: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   password_digest: string;
 };
 
 export type UserRetrun = {
   id?: number;
   username: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
 };
 
 export class UserStore {
@@ -53,8 +53,8 @@ export class UserStore {
       const passwordHash = hash(u.password_digest);
       const result = await conn.query(sql, [
         u.username,
-        u.firstName,
-        u.lastName,
+        u.firstname,
+        u.lastname,
         passwordHash,
       ]);
       const user = result.rows[0];
@@ -62,7 +62,7 @@ export class UserStore {
 
       return user;
     } catch (err) {
-      throw new Error(`Could not add new User ${u.firstName}. Error: ${err}`);
+      throw new Error(`Could not add new User ${u.firstname}. Error: ${err}`);
     }
   }
   async authenticate(
@@ -80,8 +80,8 @@ export class UserStore {
           return {
             id: result.rows[0].id,
             username: result.rows[0].username,
-            firstName: result.rows[0].firstname,
-            lastName: result.rows[0].lastname,
+            firstname: result.rows[0].firstname,
+            lastname: result.rows[0].lastname,
           };
         result.rows[0];
       }

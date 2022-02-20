@@ -30,6 +30,11 @@ These are the notes from a meeting with the frontend developer that describe wha
 - name
 - price
 
+    `TABLE : products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(64) NOT NULL,
+    price INTEGER NOT NULL DEFAULT 0
+)`
 
 #### User
 - id
@@ -37,10 +42,30 @@ These are the notes from a meeting with the frontend developer that describe wha
 - lastName
 - password
 
+    `TABLE :users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    firstname VARCHAR(30) NOT NULL,
+    lastname VARCHAR(30) NOT NULL,
+    password_digest VARCHAR NOT NULL
+)`
 #### Orders
 - id
-- id of each product in the order
+- id of each product in the order    
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+    `TABLE : orders (
+    id SERIAL PRIMARY KEY,
+    status VARCHAR(15) DEFAULT 'active',
+    user_id int REFERENCES users(id)
+)`
+
+
+    `TABLE : order_products (
+    id SERIAL PRIMARY KEY,
+    quantity integer,
+    order_id int REFERENCES orders(id),
+    product_id int REFERENCES products(id))`
 

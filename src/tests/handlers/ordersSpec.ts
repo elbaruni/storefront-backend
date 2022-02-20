@@ -32,14 +32,25 @@ export default describe("Test Orders handlers", () => {
     );
   });
   it("index orders ", async () => {
-    const response = await request.get(apiPath);
+    const response = await request
+      .get(apiPath)
+      .set("Authorization", "Bearer " + testToken);
     expect(response.status).toBe(200);
     expect(response.body).toEqual([{ id: 1, status: "active", user_id: 10 }]);
   });
   it("show order by id ", async () => {
-    const response = await request.get(`${apiPath}/1`);
+    const response = await request
+      .get(`${apiPath}/1`)
+      .set("Authorization", "Bearer " + testToken);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ id: 1, status: "active", user_id: 10 });
+  });
+  it("gets current orders by user)id ", async () => {
+    const response = await request
+      .get(`/orders/byuser/10`)
+      .set("Authorization", "Bearer " + testToken);
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual([{ id: 1, status: "active", user_id: 10 }]);
   });
   it("creates order ", async () => {
     const response = await request
